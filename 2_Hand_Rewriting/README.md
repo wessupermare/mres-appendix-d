@@ -29,8 +29,8 @@ Many of the rewrites include what the SML '97 authors refer to as 'iterated cons
 
 |    1 | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 ---  
 
@@ -38,15 +38,15 @@ Many of the rewrites include what the SML '97 authors refer to as 'iterated cons
 
 | 2    | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 3. From 1: `if A then case B of true => C | false => D else E`  
 
 | 3    | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 ---  
 
@@ -54,36 +54,36 @@ Many of the rewrites include what the SML '97 authors refer to as 'iterated cons
 
 | 4    | A: T | A: F        |
 |-----:|:----:|:-----------:|
-| B: T |   C  | _exception_ |
-| B: F |   D  | _exception_ |
+| **B: T** |   C  | _exception_ |
+| **B: F** |   D  | _exception_ |
 
 5. From 2: `(fn true => if B then C else D)(A) | false => E`  
 
 | 5    | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 6. From 2: `(fn true => if B then C else D | false => E)(A)`  
 
 | 6    | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 7. From 3: `if A then (fn true => C)(B) | false => D else E`  
 
 | 7    | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 8. From 3: `if A then (fn true => C | false => D)(B) else E`  
 
 | 8    | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 ---  
 
@@ -91,43 +91,43 @@ Many of the rewrites include what the SML '97 authors refer to as 'iterated cons
 
 | 9    | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 10. From 4 & 5: `(fn true => case B of true => C | false => D)(A) | false => E`  
 
 | 10   | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 11. From 4 & 6: `(fn true => case B of true => C | false => D | false => E)(A)`  
 
 | 11   | A: T | A: F        |
 |-----:|:----:|:-----------:|
-| B: T |   C  | _exception_ |
-| B: F |   D  | _exception_ |
+| **B: T** |   C  | _exception_ |
+| **B: F** |   D  | _exception_ |
 
 12. From 4 & 7: `case A of true => (fn true => C)(B) | false => D | false => E`  
 
 | 12   | A: T        | A: F |
 |-----:|:-----------:|:----:|
-| B: T |   C         |   D  |
-| B: F | _exception_ |   D  |
+| **B: T** |   C         |   D  |
+| **B: F** | _exception_ |   D  |
 
 13. From 4 & 8: `case A of true => (fn true => C | false => D)(B) | false => E`  
 
 | 13   | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 14. From 4: `case A of true => (fn true => C | false => D | false => E)(B)` 
  
 | 14   | A: T | A: F        |
 |-----:|:----:|:-----------:|
-| B: T |   C  | _exception_ |
-| B: F |   D  | _exception_ |
+| **B: T** |   C  | _exception_ |
+| **B: F** |   D  | _exception_ |
 
 ---  
 
@@ -135,43 +135,43 @@ Many of the rewrites include what the SML '97 authors refer to as 'iterated cons
 
 | 15   | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 16. From 10 & 12: `(fn true => (fn true => C)(B) | false => D)(A) | false => E`  
 
 | 16   | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 17. From 10 & 13: `(fn true => (fn true => C | false => D)(B))(A) | false => E`  
 
 | 17   | A: T           | A: F           |
 |-----:|:--------------:|:--------------:|
-| B: T | _syntax error_ | _syntax error_ |
-| B: F | _syntax error_ | _syntax error_ |
+| **B: T** | _syntax error_ | _syntax error_ |
+| **B: F** | _syntax error_ | _syntax error_ |
 
 18. From 11 & 12: `(fn true => (fn true => C)(B) | false => D | false => E)(A)`  
 
 | 18   | A: T        | A: F |
 |-----:|:-----------:|:----:|
-| B: T |   C         |   D  |
-| B: F | _exception_ |   D  |
+| **B: T** |   C         |   D  |
+| **B: F** | _exception_ |   D  |
 
 19. From 11 & 13: `(fn true => (fn true => C | false => D)(B) | false => E)(A)`  
 
 | 19   | A: T | A: F |
 |-----:|:----:|:----:|
-| B: T |   C  |   E  |
-| B: F |   D  |   E  |
+| **B: T** |   C  |   E  |
+| **B: F** |   D  |   E  |
 
 20. From 11 & 14: `(fn true => (fn true => C | false => D | false => E)(B))(A)`  
 
 | 20   | A: T | A: F        |
 |-----:|:----:|:-----------:|
-| B: T |   C  | _exception_ |
-| B: F |   D  | _exception_ |
+| **B: T** |   C  | _exception_ |
+| **B: F** |   D  | _exception_ |
 
 ---
 
