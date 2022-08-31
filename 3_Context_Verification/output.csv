@@ -1,0 +1,66 @@
+snippet,bare exp,full exp,bare pat,full pat,bare patrow,full patrow,bare ty,full ty,bare valbind,full valbind,fvalbind,bare dec,full dec,bare strbind,full strbind,bare strexp,full strexp,bare funbind,full funbind,bare program,full program
+(),R,A,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+{ },A,A,A,A,R,R,A,A,R,R,R,R,R,R,R,R,R,R,R,R,R
+"(exp, exp, exp)",R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"{1=exp, 2=exp, 3=exp}",R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+# lab,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"fn {lab=vid,...} => vid",A,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+case exp of match,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+(fn match)(exp),A,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+if exp then exp else exp,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+case exp of true => exp | false => exp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+exp orelse exp,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+if exp then true else exp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+exp andalso exp,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+if exp then exp else false,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+(exp; exp; exp),R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+case exp of (_) => case exp of (_) => exp,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+let dec in exp; exp end,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+let dec in (exp; exp) end,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+while exp do exp,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+let val rec exp = fn () => if exp then (exp; vid()) else () in vid() end,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"[exp, exp]",R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+exp :: exp :: nil,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+(),R,A,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+{ },A,A,A,A,R,R,A,A,R,R,R,R,R,R,R,R,R,R,R,R,R
+"(pat, pat)",R,R,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"{1=pat, 2=pat}",R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"[pat, pat]",R,R,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+pat :: pat :: nil,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+"vid, ...",R,R,R,R,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+"vid = vid, ...",R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+ty * ty,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R,R,R,R,R,R
+"{1:ty, 2:ty}",R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+vid atpat = exp | vid atpat = exp,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R,R,R
+vid = fn vid => case (vid) of (atpat) => exp | (atpat) => exp,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+fun tyvar fvalbind,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R
+val tyvar rec fvalbind,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
+datatype datbind withtype typbind,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R
+datatype datbind; type typbind,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R,R,R,R,R,R,R
+abstype datbind withtype typbind with dec end,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R,R,R
+abstype datbind with type typbind; dec end,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+strid : sigexp = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R
+strid = strexp : sigexp,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R,R,R,R,R
+strid :> sigexp = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R,R,R
+strid = strexp :> sigexp,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+funid ( strdec ),R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R,R,R
+funid ( struct strdec end ),R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R,R,R
+,,,,,,,,,,,,,,,,,,,,,
+funid ( strid : sigexp ) : sigexp = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R
+funid ( strid : sigexp) = strexp : sigexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R
+funid ( strid : sigexp ) :> sigexp = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R
+funid ( strid : sigexp) = strexp :> sigexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R
+funid ( spec ) = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R
+funid ( strid : sig spec end ) = let open strid in strexp end,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R
+funid ( spec ) :> sigexp = strexp,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,R,R
+funid ( strid : sig spec end ) = let open strid in strexp :> sigexp end,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A,A,R,R
+,,,,,,,,,,,,,,,,,,,,,
+exp;,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,A
+val it = exp;,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R
